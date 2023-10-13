@@ -1,0 +1,24 @@
+
+:root {
+    --containerSize: 200px;
+    --gridSize: 16;
+}
+
+
+.container {
+    width: var(--containerSize);
+    height: var(--containerSize);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: red;
+    box-sizing: border-box;
+    border: solid 1px darkred;
+    flex: 1 1 calc(var(--containerSize) / var(--gridSize));
+}
+
+.unselectedBox {
+    color: gray;
+}
