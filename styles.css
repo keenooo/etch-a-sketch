@@ -1,24 +1,23 @@
 
-:root {
-    --containerSize: 250px;
-    --gridSize: 16;
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
 }
 
-
 .container {
-    width: var(--containerSize);
-    height: var(--containerSize);
     display: flex;
     flex-wrap: wrap;
 }
 
 .box {
-    background-color: red;
+    background-color: gray;
     box-sizing: border-box;
-    border: solid 1px darkred;
-    flex: 1 1 calc(var(--containerSize) / var(--gridSize));
+
 }
 
 .selected-box {
-    background-color: gray;
+    background-color: blue;
 }
