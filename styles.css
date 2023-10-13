@@ -11,12 +11,13 @@ body {
     flex-wrap: wrap;
 }
 
+.new-board-btn {
+    width: 200px;
+    border-radius: 2%;
+}
+
 .box {
     background-color: gray;
     box-sizing: border-box;
 
-}
-
-.selected-box {
-    background-color: blue;
 }

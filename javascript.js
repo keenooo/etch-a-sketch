@@ -1,6 +1,8 @@
 const initGridSize = 16;
 const containerSize = 80;
 
+let blackMultiplier = 1;
+
 const container     = document.querySelector(".container");
 const newBoardBtn   = document.querySelector(".new-board-btn");
 
@@ -33,7 +35,10 @@ function createBox(gridSize, containerWidth) {
 
     box.style.flex = "1 1 " + containerWidth / gridSize + "px" ; 
 
-    box.addEventListener("mouseover", () => box.classList.add("selected-box"));
+    box.addEventListener("mouseover", () => {
+        box.style.backgroundColor = getRandomColor();
+        blackMultiplier -= 0.1;
+    });
 
     return box;
 }
@@ -41,9 +46,19 @@ function createBox(gridSize, containerWidth) {
 function newBoardBtnPress() {
     removeBoard();
 
-    const gridSize = prompt("Choose gird-size:");
+    blackMultiplier = 1;
+
+    let gridSize = prompt("Choose gird-size:");
+    if(gridSize > 80) { gridSize = 80 };
 
     createBoard(gridSize);
 }
 
+function getRandomColor() {
+    return "rgb(" + Math.floor((Math.random() * 100  + 155) * blackMultiplier) + "," +
+                    Math.floor((Math.random() * 100  + 155) * blackMultiplier) + "," +
+                    Math.floor((Math.random() * 100  + 155) * blackMultiplier) + ")"; 
+}
+
 createBoard(initGridSize);
+console.log(getRandomColor());
