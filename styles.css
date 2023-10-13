@@ -1,6 +1,6 @@
 
 :root {
-    --containerSize: 200px;
+    --containerSize: 250px;
     --gridSize: 16;
 }
 
@@ -19,6 +19,6 @@
     flex: 1 1 calc(var(--containerSize) / var(--gridSize));
 }
 
-.unselectedBox {
-    color: gray;
+.selectedBox {
+    background-color: gray;
 }
