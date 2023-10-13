@@ -18,7 +18,6 @@ function createBox() {
     box.classList.add("unselectedBox");
 
     box.addEventListener("mouseover", () => box.classList.add("selectedBox"));
-    box.addEventListener("mouseout", () => box.classList.remove("selectedBox"));
 
     return box;
 }
