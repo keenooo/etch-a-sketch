@@ -19,6 +19,6 @@
     flex: 1 1 calc(var(--containerSize) / var(--gridSize));
 }
 
-.selectedBox {
+.selected-box {
     background-color: gray;
 }
