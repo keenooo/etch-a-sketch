@@ -1,5 +1,6 @@
-const initGridSize = 16;
+let gridSize = 16;
 const containerSize = 80;
+let boxes = [];
 
 let blackMultiplier = 1;
 
@@ -9,38 +10,47 @@ const newBoardBtn   = document.querySelector(".new-board-btn");
 container.style.width = containerSize + "vh";
 container.style.height = containerSize + "vh";
 
+container.addEventListener("mouseover", (e) => {
+    const target = e.target;
+    if (target.classList.contains("box")) {
+        target.style.backgroundColor = getRandomColor();
+        blackMultiplier -= 0.1;
+    }
+});
+
 newBoardBtn.addEventListener('click', () => newBoardBtnPress())
 
-function createBoard(gridSize) {
-    const containerStyle = window.getComputedStyle(container);
-    const containerWidth = containerStyle.getPropertyValue("width").match(/\d+/);
-    console.log(containerWidth);
+window.addEventListener('resize', () => updateBoxSizes()); 
 
-    for (let i = 0; i < gridSize * gridSize; i++) {
-        const box = createBox(gridSize, containerWidth);
+createBoard(gridSize);
+
+function createBoard() {
+    const fragment = document.createDocumentFragment();
     
-        const b = container.appendChild(box);
+    for (let i = 0; i < gridSize * gridSize; i++) {
+        const box = createBox();
+        fragment.appendChild(box);
+        boxes.push(box);
     }
+    container.appendChild(fragment);
+    updateBoxSizes();
 }
 
 function removeBoard() {
+    boxes = [];
     container.innerHTML = "";
 }
 
-function createBox(gridSize, containerWidth) {
+function createBox() {
     const box = document.createElement('div');
     box.classList.add("box");
     box.classList.add("unselectedBox");
-
-
-    box.style.flex = "1 1 " + containerWidth / gridSize + "px" ; 
-
-    box.addEventListener("mouseover", () => {
-        box.style.backgroundColor = getRandomColor();
-        blackMultiplier -= 0.1;
-    });
-
     return box;
+}
+
+function updateBoxSizes() {
+    const boxSize = getContainerWidth() / gridSize;
+    boxes.forEach(box => box.style.flex = `1 1 ${boxSize}px`);
 }
 
 function newBoardBtnPress() {
@@ -48,8 +58,8 @@ function newBoardBtnPress() {
 
     blackMultiplier = 1;
 
-    let gridSize = prompt("Choose gird-size:");
-    if(gridSize > 80) { gridSize = 80 };
+    gridSize = prompt("Choose gird-size:", "16");
+    if(gridSize > 100) { gridSize = 100 };
 
     createBoard(gridSize);
 }
@@ -60,5 +70,7 @@ function getRandomColor() {
                     Math.floor((Math.random() * 100  + 155) * blackMultiplier) + ")"; 
 }
 
-createBoard(initGridSize);
-console.log(getRandomColor());
+function getContainerWidth() {
+    const containerStyle = window.getComputedStyle(container);
+    return containerStyle.getPropertyValue("width").match(/\d+/);
+}

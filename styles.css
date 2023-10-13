@@ -1,9 +1,11 @@
 body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 16px;
+    
 }
 
 .container {
@@ -12,7 +14,8 @@ body {
 }
 
 .new-board-btn {
-    width: 200px;
+    width: 30%;
+    height: 40px;
     border-radius: 2%;
 }
 
